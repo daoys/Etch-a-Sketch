@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div id="container">
+    <button id="button">Clear</button>
+    <!--<div id="playSquare">-->
+
+  </div>
+  </div>
+  <script>
+
+    playSquare = (numb) => { //function to set up area of grid for use
+      const grid = document.createElement("div");
+      const container = document.querySelector("#container")
+      container.appendChild(grid);
+      grid.setAttribute("style", "background-color: white; display: grid; grid-area: playArea; width: 50%; height: 90%; justify-self: center")
+      grid.style.gridTemplateColumns = `repeat(${numb}, 1fr)`;
+      grid.style.gridTemplateRows = `repeat(${numb}, 1fr)`
+      for (i = 1; i <= numb; i++) {
+        for (j = 1; j <= numb; j++) {
+          const div = document.createElement('div');
+          div.setAttribute("class", "gridSquares");
+          grid.appendChild(div);
+        }
+      }
+    }
+
+    function userInput() {
+      var userChoice = window.prompt("Pick number of squares for grid")
+      playSquare(userChoice);
+      const hover = document.querySelectorAll(".gridSquares")
+      for (i = 0; i < hover.length; i++) {
+        hover[i].addEventListener("mouseleave", leaveFunc)
+      }
+
+      return;
+    }
+
+    function leaveFunc(e) {
+      let grid = e.target;
+      grid.style.backgroundColor = "black"
+    }
+    userInput();
+    const btn = document.querySelector("#button");
+    btn.addEventListener("click", userInput)
+    const hover = document.querySelectorAll(".gridSquares")
+    for (i = 0; i < hover.length; i++) {
+      hover[i].addEventListener("mouseleave", leaveFunc)
+    }
+
+  </script>
+
+</body>
+
+</html>
